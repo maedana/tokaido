@@ -1,0 +1,57 @@
+inherit_gem:
+  sgcop: rails/rubocop.yml
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+# コールバックメソッド等一行だけprivateにしたいときあるんだよね
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+# .positive, .negative見づらいので
+Style/NumericPredicate:
+  Enabled: false
+
+# 別に気にしない
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+# 崩したほうが読みやすいこともある
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+# 大量に出過ぎる&そこまで気にしない
+Layout/LineLength:
+  Enabled: false
+
+# テストではupdate_column使いたい場面があるので無視
+Rails/SkipsModelValidations:
+  Exclude:
+    - "spec/**/*_spec.rb"
+
+# itで説明するのでなくてもわかる
+RSpec/NamedSubject:
+  Enabled: false
+
+# 余計なお世話なので
+RSpec/DescribeClass:
+  Enabled: false
+
+# change { } のほうが読み書きしやすいと思う
+RSpec/ExpectChange:
+  Enabled: false
+
+# どうしても深くなるときはある
+RSpec/NestedGroups:
+  Enabled: false
+
+# SystemTestはトップレベルに複数並べたいので
+RSpec/MultipleDescribes:
+  Enabled: false
+
+# 余計なお世話なので
+Sgcop/Capybara/Matchers:
+  Enabled: false
