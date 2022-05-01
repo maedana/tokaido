@@ -13,6 +13,7 @@ gem 'redis'
 gem 'sqlite3'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
+gem 'todo-txt'
 gem 'turbo-rails'
 
 group :development, :test do

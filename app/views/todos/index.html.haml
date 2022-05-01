@@ -1,9 +1,20 @@
 .bg-gray-200.h-screen
   .flex.flex-row.bg-grey-400.overflow-visible
-    .flex-none.h-screen.bg-blue-200.overflow-y-auto{class: 'w-1/6'}
-      = (1..100).each do
-        <div>hoge</div>
-    .flex-none.h-screen.bg-green-200.overflow-y-auto{class: 'w-5/6'}
+    .flex-none.h-screen.bg-blue-200.overflow-y-auto{ class: 'w-1/6' }
+      .bg-gray-800.border-gray-700
+        .flow-root
+          %ul.divide-y.divide-gray-700
+            - @todos.each do |todo|
+              %li.p-3
+                .flex.items-center.space-x-4
+                  .flex-1.min-w-0
+                    %p.text-sm.font-medium.text-white
+                      = todo
+                    %p.text-sm.truncate.text-gray-400
+                      email@windster.com
+                  .inline-flex.items-center.text-base.font-semibold.text-white
+                    $320
+    .flex-none.h-screen.bg-green-200.overflow-y-auto{ class: 'w-5/6' }
       .grid.grid-cols-4.gap-0.h-full
         .cal-1.bg-blue-800.min-h-todo-list
           Col1

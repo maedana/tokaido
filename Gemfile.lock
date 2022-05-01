@@ -228,6 +228,7 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
+    todo-txt (0.12)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -261,6 +262,7 @@ DEPENDENCIES
   sqlite3
   stimulus-rails
   tailwindcss-rails
+  todo-txt
   turbo-rails
   web-console
 
