@@ -1,5 +1,6 @@
 class TodosController < ApplicationController
   def index
-    @todos = Todo::List.new('/home/maedana/todotxt/todo.txt')
+    @todos = TodoList.all
+    @todos_by_project = TodoList.by_project
   end
 end
