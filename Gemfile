@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails'
 
 gem 'bootsnap', require: false
+gem 'dartsass-rails'
 gem 'hamlit-rails'
 gem 'importmap-rails'
 gem 'propshaft'
