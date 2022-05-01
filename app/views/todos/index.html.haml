@@ -10,7 +10,7 @@
                   %p.text-sm.font-medium.text-white
                     All
             = render partial: 'todo', collection: @todos, as: :todo
-    .flex-none.h-screen.bg-green-200{ class: 'w-5/6' }
+    .flex-none.h-screen.bg-grey-200{ class: 'w-5/6' }
       .grid.grid-cols-4.gap-0.h-full
         - @todos_by_project.each do |project, todos|
           .cal-1.bg-gray-800.border-gray-700.min-h-todo-list.overflow-y-auto
