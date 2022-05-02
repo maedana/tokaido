@@ -6,7 +6,7 @@
           %span
             (#{todo.priority})
         %span
-          = todo.text
+          = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
         %span
           = todo.contexts.join(' ')
         %span

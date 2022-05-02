@@ -24,7 +24,7 @@ class TodoList
 
   def todos
     setup
-    @todos ||= Todo::List.new('/home/maedana/todotxt/todo.txt').reject(&:done?).sort.reverse
+    @todos ||= Todo::List.new('/home/maedana/todotxt/todo.txt').reject(&:done?).sort
   end
 
   def setup
