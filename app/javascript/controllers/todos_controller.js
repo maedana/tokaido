@@ -53,4 +53,12 @@ export default class extends Controller {
       navigator.clipboard.writeText(copyText)
     }
   }
+
+  openLink() {
+    const focusedTodo = this.element.querySelector('.js-todo:focus')
+    const link = focusedTodo.querySelector('a')
+    if (link) {
+      link.click()
+    }
+  }
 }
