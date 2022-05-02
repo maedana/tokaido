@@ -29,7 +29,6 @@ class TodoList
         raw_task
       end
     end
-    puts raw_task_with_ids
     File.write('/home/maedana/todotxt/todo.txt', raw_task_with_ids.join("\n"), mode: 'w')
   end
 end
