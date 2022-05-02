@@ -27,6 +27,7 @@ export default class extends Controller {
     nextFocusTodo.focus()
   }
 
+  // MEMO: moveRightとほぼ同じDRYにしたいところ
   moveLeft() {
     const focusedTodo = this.element.querySelector('.js-todo:focus')
     const todoLists = this.element.querySelectorAll('.js-todos')
