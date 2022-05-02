@@ -16,6 +16,10 @@ class TodoList
     todos.select(&:overdue?).sort_by(&:due_on)
   end
 
+  def due_soon
+    todos.reject(&:overdue?).select { |t| t.due_on && t.due_on < 7.days.since }.sort_by(&:due_on)
+  end
+
   private
 
   def todos
