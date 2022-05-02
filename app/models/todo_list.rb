@@ -15,6 +15,21 @@ class TodoList
   private
 
   def todos
+    setup
     @todos ||= Todo::List.new('/home/maedana/todotxt/todo.txt').reject(&:done?).sort.reverse
+  end
+
+  def setup
+    raw_tasks = File.read('/home/maedana/todotxt/todo.txt').split("\n")
+    raw_task_with_ids = raw_tasks.map do |raw_task|
+      task = Todo::Task.new(raw_task)
+      if task.tags[:id].blank?
+        [raw_task, "id:#{SecureRandom.uuid}"].join(' ')
+      else
+        raw_task
+      end
+    end
+    puts raw_task_with_ids
+    File.write('/home/maedana/todotxt/todo.txt', raw_task_with_ids.join("\n"), mode: 'w')
   end
 end
