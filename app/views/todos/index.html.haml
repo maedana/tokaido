@@ -1,7 +1,8 @@
 :ruby
   hotkeys_bindings_value = {
-    j: '#js-todos->todos#moveDown',
-    k: '#js-todos->todos#moveUp',
+    j: '#js-todos-dashboard->todos#moveDown',
+    k: '#js-todos-dashboard->todos#moveUp',
+    l: '#js-todos-dashboard->todos#moveRight',
   }.to_json
   hotkeys_controlller_data = {
     data: {
@@ -10,12 +11,12 @@
     },
   }
 %div{ hotkeys_controlller_data }
-.bg-gray-200.h-screen#js-todos{ data: { controller: 'todos' } }
+.bg-gray-200.h-screen#js-todos-dashboard{ data: { controller: 'todos' } }
   .flex.flex-row.bg-grey-400.overflow-visible
     .flex-none.h-screen.bg-blue-200.overflow-y-auto{ class: 'w-1/6' }
       .bg-gray-800.border-gray-700
         .flow-root
-          %ul.divide-y.divide-gray-700
+          %ul.divide-y.divide-gray-700.js-todos
             %li.bg-gray-700.p-3
               .flex.items-center.space-x-4
                 .flex-1.min-w-0
@@ -27,7 +28,7 @@
         - @todos_by_project.each do |project, todos|
           .cal-1.bg-gray-800.border-gray-700.min-h-todo-list.overflow-y-auto
             .flow-root
-              %ul.divide-y.divide-gray-700
+              %ul.divide-y.divide-gray-700.js-todos
                 %li.bg-gray-700.p-3
                   .flex.items-center.space-x-4
                     .flex-1.min-w-0
