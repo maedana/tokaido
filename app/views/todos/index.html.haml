@@ -1,5 +1,16 @@
-%div{ data: { controller: 'hotkeys', 'hotkeys-bindings-value': '{"j": "#js-todos->todos#moveDown", "k": "#js-todos->todos#moveUp"}' } }
-#js-todos.bg-gray-200.h-screen{ data: { controller: 'todos' } }
+:ruby
+  hotkeys_bindings_value = {
+    j: '#js-todos->todos#moveDown',
+    k: '#js-todos->todos#moveUp',
+  }.to_json
+  hotkeys_controlller_data = {
+    data: {
+      controller: 'hotkeys',
+      'hotkeys-bindings-value': hotkeys_bindings_value,
+    },
+  }
+%div{ hotkeys_controlller_data }
+.bg-gray-200.h-screen#js-todos{ data: { controller: 'todos' } }
   .flex.flex-row.bg-grey-400.overflow-visible
     .flex-none.h-screen.bg-blue-200.overflow-y-auto{ class: 'w-1/6' }
       .bg-gray-800.border-gray-700
