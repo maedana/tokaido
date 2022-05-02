@@ -12,6 +12,10 @@ class TodoList
     end
   end
 
+  def overdue
+    todos.select(&:overdue?).sort_by(&:due_on)
+  end
+
   private
 
   def todos
