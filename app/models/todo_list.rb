@@ -15,6 +15,6 @@ class TodoList
   private
 
   def todos
-    @todos ||= Todo::List.new('/home/maedana/todotxt/todo.txt').sort.reverse
+    @todos ||= Todo::List.new('/home/maedana/todotxt/todo.txt').reject(&:done?).sort.reverse
   end
 end
