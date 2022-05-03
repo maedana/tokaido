@@ -16,16 +16,16 @@
 %div{ hotkeys_controlller_data }
 .bg-gray-200.h-screen#js-todos-dashboard{ data: { controller: 'todos' } }
   .flex.flex-row.bg-grey-200.overflow-visible
-    .flex-none.h-screen.bg-gray-600.overflow-y-auto{ class: 'w-1/6' }
+    .flex-none.h-screen.bg-gray-600.overflow-y-auto.hidden-scrollbar{ class: 'w-1/6' }
       = render 'todos', todos: @todos, title: '全て'
     .flex-none.h-screen.bg-grey-600{ class: 'w-5/6' }
       .grid.grid-cols-4.gap-0.h-full
         - if @overdue_todos.present?
-          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto
+          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto.hidden-scrollbar
             = render 'todos', todos: @overdue_todos, title: '期限切れ'
         - if @due_soon_todos.present?
-          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto
+          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto.hidden-scrollbar
             = render 'todos', todos: @due_soon_todos, title: "期限間近(#{7.days.since.to_date}まで)"
         - @todos_by_project.each do |project, todos|
-          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto
+          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list.overflow-y-auto.hidden-scrollbar
             = render 'todos', todos: todos, title: project

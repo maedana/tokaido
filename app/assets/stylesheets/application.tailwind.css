@@ -11,3 +11,14 @@
 }
 
 */
+
+/* see also https://zenn.dev/nbr41to/articles/11efbc362a89ba */
+@layer utilities {
+  .hidden-scrollbar {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+}
