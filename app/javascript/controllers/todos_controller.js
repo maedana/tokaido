@@ -55,7 +55,7 @@ export default class extends Controller {
 
   editMemo() {
     const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const form = focusedTodo.querySelector('form')
+    const form = focusedTodo.querySelector('form.js-todo-edit-form')
     form.requestSubmit()
   }
 }

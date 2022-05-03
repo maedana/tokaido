@@ -1,17 +1,23 @@
 %li.js-todo.bg-gray-800.border-b.border-b-gray-400.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: todo.overdue? ? 'border-l-red-700' : 'border-l-green-700', data: { controller: 'time-manager', 'time-manager-elapsed-time-value': 0, action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime', 'todo-id': todo.tags[:id] } }
-  = form_with url: edit_todo_path(todo.tags[:id]), method: :get do
-    .flex.items-center.space-x-4
-      .flex-1.min-w-0
-        %p.text-sm.font-medium.text-white.break-all
-          - if todo.priority
-            %span
-              (#{todo.priority})
+  -# MEMO: キーボード操作でrequestSubmitさせるためのフォームなので中身は空でいい。何かないとだめなのでspanをおいてる
+  = form_with url: edit_todo_path(todo.tags[:id]), method: :get, class: 'js-todo-edit-form' do
+    %span
+  = form_with model: DailyElapsedTime.new, url: save_elapsed_time_todo_path(todo.tags[:id]), data: { 'time-manager-target': 'saveForm' } do |form|
+    = form.hidden_field :todo, value: todo.text
+    = form.hidden_field :elapsed_seconds, value: 0, data: { 'time-manager-target': 'elapsedTimeField' }
+    %span
+  .flex.items-center.space-x-4
+    .flex-1.min-w-0
+      %p.text-sm.font-medium.text-white.break-all
+        - if todo.priority
           %span
-            = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
-          %span
-            = todo.contexts.join(' ')
-          %span
-            = todo.projects.join(' ')
-        %p.text-sm.truncate.text-gray-400
-          = todo.due_on&.to_s
-      .inline-flex.items-center.text-base.font-semibold.text-white{ data: { 'time-manager-target': 'elapsedTime' } }
+            (#{todo.priority})
+        %span
+          = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
+        %span
+          = todo.contexts.join(' ')
+        %span
+          = todo.projects.join(' ')
+      %p.text-sm.truncate.text-gray-400
+        = todo.due_on&.to_s
+    .inline-flex.items-center.text-base.font-semibold.text-white{ data: { 'time-manager-target': 'elapsedTime' } }
