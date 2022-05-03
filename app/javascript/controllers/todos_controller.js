@@ -45,20 +45,17 @@ export default class extends Controller {
     nextFocusTodo.focus()
   }
 
-  copyEditCommand() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const todoId = focusedTodo.dataset.todoId
-    if (todoId) {
-      const copyText = `nvim /home/maedana/todotxt/todos/${todoId}.md`
-      navigator.clipboard.writeText(copyText)
-    }
-  }
-
   openLink() {
     const focusedTodo = this.element.querySelector('.js-todo:focus')
     const link = focusedTodo.querySelector('a')
     if (link) {
       link.click()
     }
+  }
+
+  editMemo() {
+    const focusedTodo = this.element.querySelector('.js-todo:focus')
+    const form = focusedTodo.querySelector('form')
+    form.requestSubmit()
   }
 }

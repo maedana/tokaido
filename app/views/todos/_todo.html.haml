@@ -1,18 +1,19 @@
 %li.js-todo.bg-gray-800.border-b.border-b-gray-400.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: todo.overdue? ? 'border-l-red-700' : 'border-l-green-700', data: { 'todo-id': todo.tags[:id] } }
-  .flex.items-center.space-x-4
-    .flex-1.min-w-0
-      %p.text-sm.font-medium.text-white
-        - if todo.priority
+  = form_with url: edit_todo_path(todo.tags[:id]), method: :get do
+    .flex.items-center.space-x-4
+      .flex-1.min-w-0
+        %p.text-sm.font-medium.text-white
+          - if todo.priority
+            %span
+              (#{todo.priority})
           %span
-            (#{todo.priority})
-        %span
-          = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
-        %span
-          = todo.contexts.join(' ')
-        %span
-          = todo.projects.join(' ')
-      %p.text-sm.truncate.text-gray-400
-        = todo.due_on&.to_s
-    -#
-      .inline-flex.items-center.text-base.font-semibold.text-white
-        $320
+            = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
+          %span
+            = todo.contexts.join(' ')
+          %span
+            = todo.projects.join(' ')
+        %p.text-sm.truncate.text-gray-400
+          = todo.due_on&.to_s
+      -#
+        .inline-flex.items-center.text-base.font-semibold.text-white
+          $320
