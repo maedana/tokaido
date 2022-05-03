@@ -8,6 +8,19 @@ export default class extends Controller {
   static targets = ['elapsedTime']
 
   connect() {
-    this.elapsedTimeTarget.textContent = this.elapsedTimeValue
+    this.timeout = null
+  }
+
+  startCountTime() {
+    clearTimeout(this.timeout)
+    if (this.element == document.activeElement) {
+      this.elapsedTimeValue += 1
+      this.elapsedTimeTarget.textContent = this.elapsedTimeValue
+    }
+    this.timeout = setTimeout(() => { this.startCountTime() }, 1000)
+  }
+
+  stopCountTime() {
+    clearTimeout(this.timeout)
   }
 }
