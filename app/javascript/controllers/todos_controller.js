@@ -40,7 +40,7 @@ export default class extends Controller {
     this.focusedElementsByTodos[currentTodoListIndex] = focusedTodo
     let nextFocusTodo = this.focusedElementsByTodos[currentTodoListIndex - 1] || todoLists[currentTodoListIndex - 1]?.querySelector('.js-todo')
     if (!nextFocusTodo) {
-      nextFocusTodo = this.focusedElementsByTodos[0] || todoLists[0]?.querySelector('.js-todo')
+      nextFocusTodo = this.focusedElementsByTodos[todoLists.length - 1] || todoLists[todoLists.length - 1]?.querySelector('.js-todo')
     }
     nextFocusTodo.focus()
   }
