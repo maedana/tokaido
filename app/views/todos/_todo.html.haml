@@ -20,8 +20,8 @@
           %span
             (#{todo.priority})
         %span
-          = Rinku.auto_link(todo.text, :urls, 'target="_blank"').html_safe
-      %p.text-xs.truncate.text-gray-400
-        = todo.due_on&.to_s
-    .inline-flex.items-center.text-base.font-hairline.text-gray-400{ data: { 'time-manager-target': 'elapsedTime' } }
-      = default_elapsed_time_value
+          = Rinku.auto_link(todo.text, :urls, 'target="_blank"') { |_url| '[URL]' }.html_safe
+      .flex.justify-between.text-xs.text-gray-400
+        %p
+          = todo.due_on&.to_s || '期限なし'
+        %p{ data: { 'time-manager-target': 'elapsedTime' } }
