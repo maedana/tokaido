@@ -10,17 +10,21 @@ export default class extends Controller {
   connect() {
     this.elapsedTimeValue = this.elapsedTimeFieldTarget.value
     this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
-    this.timeout = null
+    // MEMO: Web Workerを使って工夫しないとバックグランドで時間計測が止まってしまう(setTimeoutやsetIntervalを直接使うとバックグランドでは動作しないので、Workerに逃がしている)
+    this.worker = new Worker('time_worker.js')
   }
 
   startCountTime() {
-    clearTimeout(this.timeout)
-    if (this.element == document.activeElement) {
-      this.elapsedTimeValue += 1
-      this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
-      this.elapsedTimeFieldTarget.value = this.elapsedTimeValue
+    this.worker.postMessage({})
+    this.worker.onmessage = () => {
+      if (this.element == document.activeElement) {
+        this.elapsedTimeValue += 1
+        this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
+        this.elapsedTimeFieldTarget.value = this.elapsedTimeValue
+      }
+      this.saveFormTarget.requestSubmit()
+      this.worker.postMessage({})
     }
-    this.timeout = setTimeout(() => { this.startCountTime() }, 1000)
   }
 
   stopCountTime() {
