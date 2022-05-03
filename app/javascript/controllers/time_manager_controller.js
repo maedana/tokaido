@@ -10,25 +10,29 @@ export default class extends Controller {
   connect() {
     this.elapsedTimeValue = this.elapsedTimeFieldTarget.value
     this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
-    // MEMO: Web Workerを使って工夫しないとバックグランドで時間計測が止まってしまう(setTimeoutやsetIntervalを直接使うとバックグランドでは動作しないので、Workerに逃がしている)
-    this.worker = new Worker('time_worker.js')
   }
 
   startCountTime() {
+    // MEMO: Web Workerを使って工夫しないとバックグランドで時間計測が止まってしまう(setTimeoutやsetIntervalを直接使うとバックグランドでは動作しないので、Workerに逃がしている)
+    this.worker = new Worker('time_worker.js')
     this.worker.postMessage({})
     this.worker.onmessage = () => {
-      if (this.element == document.activeElement) {
+      if (this.element === document.activeElement) {
         this.elapsedTimeValue += 1
         this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
         this.elapsedTimeFieldTarget.value = this.elapsedTimeValue
+        this.saveFormTarget.requestSubmit()
       }
-      this.saveFormTarget.requestSubmit()
       this.worker.postMessage({})
     }
   }
 
   stopCountTime() {
-    clearTimeout(this.timeout)
+    // アプリ切り替え以外のフォーカス移動ならworker止めたい
+    // アプリ切り替えならactiveElementは自分のままなのでバックグラウンドで動かし続けたい
+    if (this.element !== document.activeElement) {
+      this.worker?.terminate()
+    }
     this.saveFormTarget.requestSubmit()
   }
 
