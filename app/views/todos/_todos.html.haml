@@ -1,0 +1,8 @@
+.flow-root.h-screen
+  %ul.h-screen.bg-gray-600.js-todos
+    %li.bg-gray-700.border-y.border-y-gray-400.p-3
+      .flex.items-center.space-x-4
+        .flex-1.min-w-0
+          %p.text-sm.font-medium.text-white.text-center
+            = title
+    = render partial: 'todo', collection: todos, as: :todo
