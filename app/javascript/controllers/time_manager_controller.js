@@ -8,6 +8,7 @@ export default class extends Controller {
   static targets = ['elapsedTime', 'elapsedTimeField', 'saveForm']
 
   connect() {
+    this.elapsedTimeValue = this.elapsedTimeFieldTarget.value
     this.timeout = null
   }
 
