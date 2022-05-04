@@ -53,7 +53,11 @@ export default class extends Controller {
   _focus(focusCandidate) {
     if (this.todoTargets.includes(focusCandidate)) {
       this.focusedTodo = focusCandidate
-      this.focusedTodo?.focus()
+      this.focusedTodo.focus()
+      // タイトル部分がstickyで上までスクロールしきらないのを補正
+      if (this.focusedTodo.dataset.isFirstInList === 'true') {
+        this.todoListTargets[this.currentTodoListIndex].scrollTop = 0
+      }
     }
   }
 }
