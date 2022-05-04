@@ -19,45 +19,38 @@ export default class extends Controller {
     this._focus(this.focusedTodo.previousElementSibling)
   }
 
+  moveRight() {
+    const todoLists = this.todoListTargets
+    this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
+    const nextTodoListIndex = todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0
+    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
+    this.currentTodoListIndex = nextTodoListIndex
+    this._focus(nextFocusTodo)
+  }
+
+  // MEMO: moveRightとほぼ同じDRYにしたいところ
+  moveLeft() {
+    const todoLists = this.todoListTargets
+    this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
+    const nextTodoListIndex = todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1
+    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
+    this.currentTodoListIndex = nextTodoListIndex
+    this._focus(nextFocusTodo)
+  }
+
+  openLink() {
+    this.focusedTodo.querySelector('a')?.click()
+  }
+
+  editMemo() {
+    const form = this.focusedTodo.querySelector('form.js-todo-edit-form')
+    form.requestSubmit()
+  }
+
   _focus(focusCandidate) {
     if (focusCandidate) {
       this.focusedTodo = focusCandidate
       this.focusedTodo?.focus()
     }
-  }
-
-  moveRight() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const todoLists = this.todoListTargets
-    this.focusedElementsByTodos[this.currentTodoListIndex] = focusedTodo
-    const nextTodoListIndex = todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0
-    let nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
-    this.currentTodoListIndex = nextTodoListIndex
-    nextFocusTodo.focus()
-  }
-
-  // MEMO: moveRightとほぼ同じDRYにしたいところ
-  moveLeft() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const todoLists = this.todoListTargets
-    this.focusedElementsByTodos[this.currentTodoListIndex] = focusedTodo
-    const nextTodoListIndex = todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1
-    let nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
-    this.currentTodoListIndex = nextTodoListIndex
-    nextFocusTodo.focus()
-  }
-
-  openLink() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const link = focusedTodo.querySelector('a')
-    if (link) {
-      link.click()
-    }
-  }
-
-  editMemo() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    const form = focusedTodo.querySelector('form.js-todo-edit-form')
-    form.requestSubmit()
   }
 }
