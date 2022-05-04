@@ -38,7 +38,7 @@ export default class extends Controller {
 
   _humanElapsedTimeValue() {
     const hour = Math.floor(this.elapsedTimeValue / 3600).toString()
-    const minutes = Math.floor(this.elapsedTimeValue / 60).toString()
+    const minutes = Math.floor((this.elapsedTimeValue - hour * 3600) / 60).toString()
     const seconds = (this.elapsedTimeValue % 60).toString()
     return `${hour.padStart(2, '0')}:${minutes.padStart(2, '0')}:${seconds.padStart(2, '0')}`
   }
