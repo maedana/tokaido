@@ -5,4 +5,5 @@ Rails.application.routes.draw do
       post :save_elapsed_time
     end
   end
+  resources :overdue_todos, only: %i[index]
 end
