@@ -15,7 +15,7 @@ gem 'rinku'
 gem 'sqlite3'
 gem 'stimulus-rails'
 gem 'tailwindcss-rails'
-gem 'todo-txt'
+gem 'todo-txt', github: 'maedana/todo-txt-gem'
 gem 'turbo-rails'
 
 group :development, :test do

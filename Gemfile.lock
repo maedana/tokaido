@@ -10,6 +10,12 @@ GIT
       rubocop-rake (~> 0.6.0)
       rubocop-rspec (~> 2.10.0)
 
+GIT
+  remote: https://github.com/maedana/todo-txt-gem.git
+  revision: 308ad2a8e6f2b156530bf05420f2a65691b348ec
+  specs:
+    todo-txt (0.12)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -233,7 +239,6 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
-    todo-txt (0.12)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -269,7 +274,7 @@ DEPENDENCIES
   sqlite3
   stimulus-rails
   tailwindcss-rails
-  todo-txt
+  todo-txt!
   turbo-rails
   web-console
 
