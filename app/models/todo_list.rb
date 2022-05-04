@@ -17,6 +17,10 @@ class TodoList
     todos
   end
 
+  def find(uuid)
+    todos.find { |todo| todo.tags[:id] == uuid }
+  end
+
   def by_project
     projects = todos.map(&:projects).flatten.uniq.sort
     {}.tap do |h|
