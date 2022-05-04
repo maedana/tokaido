@@ -9,6 +9,9 @@ export default class extends Controller {
     this.focusedTodo = this.todoTarget
     this.focusedTodo?.focus() // デフォルトで最初のTodoにフォーカス
     this.currentTodoListIndex = 0
+    this.firstTodoInLists = this.todoTargets.filter((element) => {
+      return element.dataset.isFirstInList === 'true'
+    })
   }
 
   moveDown() {
@@ -23,7 +26,7 @@ export default class extends Controller {
     const todoLists = this.todoListTargets
     this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
     const nextTodoListIndex = todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0
-    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
+    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || this.firstTodoInLists[nextTodoListIndex]
     this.currentTodoListIndex = nextTodoListIndex
     this._focus(nextFocusTodo)
   }
@@ -33,7 +36,7 @@ export default class extends Controller {
     const todoLists = this.todoListTargets
     this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
     const nextTodoListIndex = todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1
-    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || todoLists[nextTodoListIndex]?.querySelector('.js-todo')
+    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || this.firstTodoInLists[nextTodoListIndex]
     this.currentTodoListIndex = nextTodoListIndex
     this._focus(nextFocusTodo)
   }
@@ -48,7 +51,7 @@ export default class extends Controller {
   }
 
   _focus(focusCandidate) {
-    if (focusCandidate) {
+    if (this.todoTargets.includes(focusCandidate)) {
       this.focusedTodo = focusCandidate
       this.focusedTodo?.focus()
     }
