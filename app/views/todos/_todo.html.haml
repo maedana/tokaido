@@ -1,5 +1,13 @@
-- default_elapsed_time_value = DailyElapsedTime.find_by(uuid: todo.tags[:id], target_date: Date.current)&.elapsed_seconds || 0
-%li.js-todo.bg-gray-800.border-b.border-b-gray-500.border-r-0.border-r-gray-500.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: todo.overdue? ? 'border-l-red-700' : 'border-l-green-700', data: { controller: 'time-manager', 'time-manager-elapsed-time-value': 0, action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime', 'todo-id': todo.tags[:id] } }
+:ruby
+  default_elapsed_time_value = DailyElapsedTime.find_by(uuid: todo.tags[:id], target_date: Date.current)&.elapsed_seconds || 0
+  todo_data = {
+    controller: 'time-manager',
+    'time-manager-elapsed-time-value': 0,
+    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime',
+    'todos-target': 'todo',
+    'todo-id': todo.tags[:id],
+  }
+%li.js-todo.bg-gray-800.border-b.border-b-gray-500.border-r-0.border-r-gray-500.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: todo.overdue? ? 'border-l-red-700' : 'border-l-green-700', data: todo_data }
   -# MEMO: キーボード操作でrequestSubmitさせるためのフォームなので中身は空でいい。何かないとだめなのでspanをおいてる
   = form_with url: edit_todo_path(todo.tags[:id]), method: :get, class: 'js-todo-edit-form' do
     %span

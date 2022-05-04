@@ -2,23 +2,28 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="todos"
 export default class extends Controller {
-  static targets = ['todoList']
+  static targets = ['todoList', 'todo']
 
   connect() {
     this.focusedElementsByTodos = []
-    const firstTodo = this.element.querySelector('.js-todo')
-    firstTodo.focus()
+    this.focusedTodo = this.todoTarget
+    this.focusedTodo?.focus() // デフォルトで最初のTodoにフォーカス
     this.currentTodoListIndex = 0
   }
 
   moveDown() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    focusedTodo.nextElementSibling.focus()
+    this._focus(this.focusedTodo.nextElementSibling)
   }
 
   moveUp() {
-    const focusedTodo = this.element.querySelector('.js-todo:focus')
-    focusedTodo.previousElementSibling.focus()
+    this._focus(this.focusedTodo.previousElementSibling)
+  }
+
+  _focus(focusCandidate) {
+    if (focusCandidate) {
+      this.focusedTodo = focusCandidate
+      this.focusedTodo?.focus()
+    }
   }
 
   moveRight() {
