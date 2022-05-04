@@ -1,4 +1,6 @@
 class TodosController < ApplicationController
+  before_action :set_nvim_client, only: %i[edit]
+
   def index
     todo_list = TodoList.new
     @todos = todo_list.all
@@ -9,15 +11,14 @@ class TodosController < ApplicationController
 
   def edit
     todo_uuid = params[:id]
-    begin
-      client = Neovim.attach_unix(ENV.fetch('NVIM_LISTEN_ADDRESS', '/tmp/nvim.sock'))
-    rescue StandardError => e
-      Rails.logger.debug(e.backtrace.join("\n"))
-      head :internal_server_error, message: 'Could not connect to Neovim.'
-      return
-    end
     md_file_path = File.join(TodoList.todotxt_markdown_dir, "#{todo_uuid}.md")
-    client.command("e #{md_file_path}")
+    begin
+      @client.command("e #{md_file_path}")
+    rescue StandardError
+      # 編集中の場合別のファイルを開こうとしてエラーになる。その場合は今開いているものを強制保存してから今回のファイルを開く
+      @client.command('w!')
+      @client.command("e #{md_file_path}")
+    end
     head :ok
   end
 
@@ -33,5 +34,12 @@ class TodosController < ApplicationController
 
   def daily_elapsed_time_params
     params.require(:daily_elapsed_time).permit(:todo, :elapsed_seconds)
+  end
+
+  def set_nvim_client
+    @client = Neovim.attach_unix(ENV.fetch('NVIM_LISTEN_ADDRESS', '/tmp/nvim.sock'))
+  rescue StandardError => e
+    Rails.logger.debug(e.backtrace.join("\n"))
+    head :internal_server_error, message: 'Could not connect to Neovim.'
   end
 end
