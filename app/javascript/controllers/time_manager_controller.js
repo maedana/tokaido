@@ -14,7 +14,7 @@ export default class extends Controller {
 
   startCountTime() {
     // MEMO: Web Workerを使って工夫しないとバックグランドで時間計測が止まってしまう(setTimeoutやsetIntervalを直接使うとバックグランドでは動作しないので、Workerに逃がしている)
-    this.worker = new Worker('time_worker.js')
+    this.worker = new Worker('/time_worker.js')
     this.worker.postMessage({})
     this.worker.onmessage = () => {
       if (this.element === document.activeElement) {
