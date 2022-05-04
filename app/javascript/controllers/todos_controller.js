@@ -45,11 +45,6 @@ export default class extends Controller {
     this.focusedTodo.querySelector('a')?.click()
   }
 
-  editMemo() {
-    const form = this.focusedTodo.querySelector('form.js-todo-edit-form')
-    form.requestSubmit()
-  }
-
   _focus(focusCandidate) {
     if (this.todoTargets.includes(focusCandidate)) {
       this.focusedTodo = focusCandidate

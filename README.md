@@ -32,7 +32,7 @@ tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]�
 ```
 
 ## 操作方法
-Vimライクなキーボード操作のみ可能です。
+Vimライクなキーボード操作のみ可能です。NeoVim連携が正しく設定されていればフォーカスのあるtodoのメモがNeoVim側で自動で開きます。
 - j
   - 次のtodoにフォーカスが移動
 - k
@@ -43,8 +43,6 @@ Vimライクなキーボード操作のみ可能です。
   - 右のリストのtodoにフォーカスが移動
 - o
   - todo内部にURLがある場合に対象URLを別ウィンドウで開く
-- e
-  - NVIM_LISTEN_ADDRESSを指定したNeoVimプロセスが存在すれば、todoの詳細メモ用のmarkdownファイルをNeoVim上に自動で開く
   
 ## その他
 ### 連携用のNeoVimの起動例
