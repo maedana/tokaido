@@ -8,9 +8,10 @@
           = turbo_frame_tag 'overdue_todos', src: overdue_todos_path do
             .text-white.p-3
               読み込み中...
-        - if @due_soon_todos.present?
-          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
-            = render 'todos', todos: @due_soon_todos, title: "期限間近(#{7.days.since.to_date}まで)"
+        .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
+          = turbo_frame_tag 'overdue_todos', src: due_soon_todos_path do
+            .text-white.p-3
+              読み込み中...
         - @todos_by_project.each do |project, todos|
           .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
             = render 'todos', todos: todos, title: project

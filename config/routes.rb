@@ -6,4 +6,5 @@ Rails.application.routes.draw do
     end
   end
   resources :overdue_todos, only: %i[index]
+  resources :due_soon_todos, only: %i[index]
 end

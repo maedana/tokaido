@@ -5,7 +5,6 @@ class TodosController < ApplicationController
     todo_list = TodoList.new
     @todos = todo_list.all
     @todos_by_project = todo_list.by_project
-    @due_soon_todos = todo_list.due_soon
   end
 
   def edit
