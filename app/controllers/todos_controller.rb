@@ -9,7 +9,13 @@ class TodosController < ApplicationController
 
   def edit
     todo_uuid = params[:id]
-    client = Neovim.attach_unix(ENV.fetch('NVIM_LISTEN_ADDRESS'))
+    begin
+      client = Neovim.attach_unix(ENV.fetch('NVIM_LISTEN_ADDRESS', '/tmp/nvim.sock'))
+    rescue StandardError => e
+      Rails.logger.debug(e.backtrace.join("\n"))
+      head :internal_server_error, message: 'Could not connect to Neovim.'
+      return
+    end
     md_file_path = File.join(TodoList.todotxt_markdown_dir, "#{todo_uuid}.md")
     client.command("e #{md_file_path}")
     head :ok
