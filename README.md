@@ -1,6 +1,6 @@
 # README
 
-tokaidoは[todo.txt format][1]の[topydo colums][2]ライクなキーボードで操作するビューワーです。
+tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]ライクなキーボード操作でブラウザから閲覧するビューワーです。
 
 ## 機能
 - Vimライクなキー操作で[todo.txt][1]の内容ををブラウザ上でわかりやすく確認
@@ -8,6 +8,7 @@ tokaidoは[todo.txt format][1]の[topydo colums][2]ライクなキーボード�
   - 各todoの移動は`hjkl`操作で可
 - NeoVimと連携して各todoの詳細をNeoVim上でmarkdownで編集
 - 選択中のtodoについて作業時間を自動で記録(SQLite3のデータベースに保存)
+- 編集系機能はありません。[todo.txt format][1]には多用なクライアントがあり、編集はそれらを利用したり、直接エディタ等で[todo.txt format][1]のファイルを編集する想定です。個人的に作業時間計測や、todoの詳細を別途テキストファイルで楽に書くということがやりたくて作ったものです。
 
 ## デモ
 ![gif][3]
@@ -53,4 +54,4 @@ Vimライクなキーボード操作のみ可能です。
 
 [1]: https://github.com/todotxt/todo.txt
 [2]: https://github.com/topydo/topydo
-[3]: https://raw.githubusercontent.com/maedana/tokaido/master/docs/demo.gif
+[3]: https://raw.githubusercontent.com/maedana/tokaido/main/docs/demo.gif
