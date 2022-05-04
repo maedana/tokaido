@@ -10,7 +10,7 @@ class TodosController < ApplicationController
   def edit
     todo_uuid = params[:id]
     client = Neovim.attach_unix(ENV.fetch('NVIM_LISTEN_ADDRESS'))
-    md_file_path = File.join(TodoList.todotxt_dir, 'todos', "#{todo_uuid}.md")
+    md_file_path = File.join(TodoList.todotxt_markdown_dir, "#{todo_uuid}.md")
     client.command("e #{md_file_path}")
     head :ok
   end

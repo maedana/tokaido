@@ -1,11 +1,15 @@
 class TodoList
   class << self
     def todotxt_dir
-      @todotxt_dir ||= ENV.fetch('TODOTXT_DIR')
+      @todotxt_dir ||= ENV.fetch('TODOTXT_DIR', "#{ENV.fetch('HOME')}/todotxt")
     end
 
     def todotxt_path
       @todotxt_path ||= File.join(todotxt_dir, 'todo.txt')
+    end
+
+    def todotxt_markdown_dir
+      @todotxt_markdown_dir ||= File.join(TodoList.todotxt_dir, 'todos')
     end
   end
 

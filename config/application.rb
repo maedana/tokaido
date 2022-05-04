@@ -33,5 +33,11 @@ module Tokaido
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.after_initialize do
+      FileUtils.mkdir_p(TodoList.todotxt_dir)
+      FileUtils.mkdir_p(TodoList.todotxt_markdown_dir)
+      FileUtils.touch(TodoList.todotxt_path) unless File.exist?(TodoList.todotxt_path)
+    end
   end
 end
