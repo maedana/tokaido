@@ -50,13 +50,7 @@ class TodoList
     due_soon.present?
   end
 
-  private
-
-  def todos
-    setup
-    @todos ||= Todo::List.new(raw_tasks).reject(&:done?).sort
-  end
-
+  # todo.txtフォーマットを拡張し、各todo識別のためのuuuidをtagとして付与
   def setup
     raw_task_with_ids = raw_tasks.map do |raw_task|
       task = Todo::Task.new(raw_task)
@@ -66,6 +60,9 @@ class TodoList
         raw_task
       end
     end
+    return if raw_task_with_ids == raw_tasks
+
+    # 変更があったときだけ保存
     File.open(TodoList.todotxt_path, File::RDWR) do |f|
       # MEMO: 同時アクセスでのファイル消失を防ぐためロックをかけている
       # see also https://docs.ruby-lang.org/ja/latest/method/File/i/flock.html
@@ -73,6 +70,12 @@ class TodoList
       f.flock(File::LOCK_EX)
       f.write(raw_task_with_ids.join("\n"))
     end
+  end
+
+  private
+
+  def todos
+    @todos ||= Todo::List.new(raw_tasks).reject(&:done?).sort
   end
 
   def raw_tasks

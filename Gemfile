@@ -7,6 +7,7 @@ gem 'bootsnap', require: false
 gem 'dartsass-rails'
 gem 'hamlit-rails'
 gem 'importmap-rails'
+gem 'listen'
 gem 'neovim'
 gem 'propshaft'
 gem 'puma'
