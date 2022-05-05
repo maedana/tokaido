@@ -7,7 +7,6 @@ export default class extends Controller {
 
   connect() {
     this.currentTodoListIndex = 0
-    this._currentTodoListController()?.focus()
   }
 
   moveDown() {

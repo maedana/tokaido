@@ -1,7 +1,7 @@
 :ruby
   todo_data = {
     controller: 'time-manager todo-memo todo-focus-manager',
-    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel',
+    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel focus->todo-focus-manager#saveFocus',
     'time-manager-elapsed-time-value': 0,
     'todo-memo-available-value': @neovim_available,
     'todo-focus-manager-list-key-value': list_key,
