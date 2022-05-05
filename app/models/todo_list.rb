@@ -1,4 +1,7 @@
 class TodoList
+  include ActiveModel::Model
+  include Turbo::Broadcastable
+
   class << self
     def todotxt_dir
       @todotxt_dir ||= ENV.fetch('TODOTXT_DIR', "#{ENV.fetch('HOME')}/todotxt")
@@ -70,6 +73,15 @@ class TodoList
       f.flock(File::LOCK_EX)
       f.write(raw_task_with_ids.join("\n"))
     end
+  end
+
+  def broadcast_to_dashboard
+    broadcast_update_to(
+      'todos',
+      target: 'dashboard',
+      partial: 'todos/dashboard',
+      locals: { todo_list: self, todos: self.all, projects: self.projects }
+    )
   end
 
   private

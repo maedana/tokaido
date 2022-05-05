@@ -44,7 +44,10 @@ module Tokaido
       # Todoファイルの監視を行い、変更があれば即時反映
       listener = Listen.to(TodoList.todotxt_dir, only: /todo\.txt$/) do |modified|
         if modified.include?(TodoList.todotxt_path)
-          TodoList.new.setup
+          todo_list = TodoList.new
+          todo_list.setup
+          # TurboStream(WebSocketで画面を自動更新する)
+          todo_list.broadcast_to_dashboard
         end
       end
       listener.start
