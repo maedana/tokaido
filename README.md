@@ -48,6 +48,10 @@ NeoVim連携を利用する場合、別ターミナルで以下を実行してNe
 - o
   - todo内部にURLがある場合に対象URLを別ウィンドウで開く
 
+## 注意事項
+- [todo.txt][1]のプロジェクト名に日本語が含まれていると一部機能しなくなる
+
+
 [1]: https://github.com/todotxt/todo.txt
 [2]: https://github.com/topydo/topydo
 [3]: https://raw.githubusercontent.com/maedana/tokaido/main/docs/demo.gif

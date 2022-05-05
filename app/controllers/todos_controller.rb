@@ -1,8 +1,8 @@
 class TodosController < ApplicationController
   def index
-    todo_list = TodoList.new
-    @todos = todo_list.all
-    @projects = todo_list.projects
+    @todo_list = TodoList.new
+    @todos = @todo_list.all
+    @projects = @todo_list.projects
   end
 
   def edit

@@ -1,17 +1,24 @@
-= render layout: 'todos/index', locals: { todo_list_keys: ['all', 'overdue', 'due_soon', *@projects] } do
+:ruby
+  todo_list_keys = ['all']
+  todo_list_keys.push('overdue') if @todo_list.has_overdue?
+  todo_list_keys.push('due_soon') if @todo_list.has_due_soon?
+  todo_list_keys.concat(@projects)
+= render layout: 'todos/index', locals: { todo_list_keys: todo_list_keys } do
   .flex.flex-row.bg-grey-200.overflow-visible
     .flex-none.h-screen.bg-gray-600{ class: 'w-1/6' }
       = render 'todos', todos: @todos, key: 'all', title: '全て'
     .flex-none.h-screen.bg-grey-600{ class: 'w-5/6' }
       .grid.grid-cols-4.gap-0.h-full
-        .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
-          = turbo_frame_tag 'overdue_todos', src: overdue_todos_path do
-            .text-white.p-3
-              読み込み中...
-        .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
-          = turbo_frame_tag 'overdue_todos', src: due_soon_todos_path do
-            .text-white.p-3
-              読み込み中...
+        - if @todo_list.has_overdue?
+          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
+            = turbo_frame_tag 'overdue_todos', src: overdue_todos_path do
+              .text-white.p-3
+                読み込み中...
+        - if @todo_list.has_due_soon?
+          .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
+            = turbo_frame_tag 'due_soon_todos', src: due_soon_todos_path do
+              .text-white.p-3
+                読み込み中...
         - @projects.each do |project|
           .cal-1.bg-gray-600.border-gray-700.min-h-todo-list
             = turbo_frame_tag "#{project}_todos", src: project_todos_path(project) do

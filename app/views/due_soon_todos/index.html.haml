@@ -1,5 +1,5 @@
 = render layout: 'todos/index', locals: { todo_list_keys: ['due_soon'] } do
   .flex.flex-row.bg-grey-200.overflow-visible
     .flex-none.h-screen.bg-gray-600{ class: 'w-1/6' }
-      = turbo_frame_tag 'overdue_todos' do
+      = turbo_frame_tag 'due_soon_todos' do
         = render partial: 'todos/todos', locals: { todos: @due_soon_todos, key: 'due_soon', title: "期限間近(#{7.days.since.to_date}まで)" }

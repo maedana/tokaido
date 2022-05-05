@@ -42,6 +42,14 @@ class TodoList
     todos.map(&:projects).flatten.uniq.sort
   end
 
+  def has_overdue?
+    overdue.present?
+  end
+
+  def has_due_soon?
+    due_soon.present?
+  end
+
   private
 
   def todos
