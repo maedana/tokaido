@@ -1,5 +1,5 @@
-= render layout: 'todos/index' do
+= render layout: 'todos/index', locals: { todo_list_keys: ['overdue'] } do
   .flex.flex-row.bg-grey-200.overflow-visible
     .flex-none.h-screen.bg-gray-600{ class: 'w-1/6' }
       = turbo_frame_tag 'overdue_todos' do
-        = render partial: 'todos/todos', locals: { todos: @overdue_todos, title: '期限切れ' }
+        = render partial: 'todos/todos', locals: { todos: @overdue_todos, key: 'overdue', title: '期限切れ' }

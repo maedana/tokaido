@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="todos"
 export default class extends Controller {
   static targets = ['todoList']
+  static values = { todoListKeys: Array }
 
   connect() {
     this.currentTodoListIndex = 0
@@ -31,6 +32,14 @@ export default class extends Controller {
 
   openLink() {
     this.focusedTodo.querySelector('a')?.click()
+  }
+
+  // focusinならバブリングするので、todoにフォーカスがあたったときの処理をフックしている
+  // フォーカス位置のindexを再セットしている。キーボード操作とマウスクリックで現在値を合わせるための処置
+  resetActiveTodoListIndex() {
+    const activeFocusManagerController = this.application.getControllerForElementAndIdentifier(document.activeElement, 'todo-focus-manager')
+    const activeListKey = activeFocusManagerController?.listKeyValue
+    this.currentTodoListIndex = this.todoListKeysValue.findIndex((key) => key === activeListKey) || 0
   }
 
   _currentTodoListController() {

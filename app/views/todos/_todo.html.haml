@@ -1,10 +1,11 @@
 :ruby
   todo_data = {
-    controller: 'time-manager todo-memo',
-    'time-manager-elapsed-time-value': 0,
+    controller: 'time-manager todo-memo todo-focus-manager',
     action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel',
+    'time-manager-elapsed-time-value': 0,
+    'todo-focus-manager-list-key-value': list_key,
+    'todo-focus-manager-uuid-value': todo.tags[:id],
     'todo-list-target': 'todo',
-    'todo-id': todo.tags[:id],
   }
 %li.bg-gray-800.border-b.border-b-gray-500.border-r-0.border-r-gray-500.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: "#{todo.overdue? ? 'border-l-red-700' : 'border-l-green-700'}", data: todo_data }
   -# MEMO: キーボード操作でrequestSubmitさせるためのフォームなので中身は空でいい。何かないとだめなのでspanをおいてる
