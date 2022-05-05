@@ -1,14 +1,14 @@
 # README
 
-tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]ライクなキーボード操作でブラウザから閲覧するビューワーです。
+tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]にインスパイアされたVimライクなキーボード操作でブラウザから閲覧するためのビューワーです。
 
 ## 機能
-- Vimライクなキー操作で[todo.txt][1]の内容ををブラウザ上でわかりやすく確認
-  - 全体表示エリア, 期限間近表示エリア、期限切れ表示エリア、プロジェクトごとの表示エリアでそれぞれのtodoを優先度順に表示出来る
-  - 各todoの移動は`hjkl`操作で可
-- NeoVimと連携して各todoの詳細をNeoVim上でmarkdownで編集
-- 選択中のtodoについて作業時間を自動で記録(SQLite3のデータベースに保存)
-- 編集系機能はありません。[todo.txt format][1]には多用なクライアントがあり、編集はそれらを利用したり、直接エディタ等で[todo.txt format][1]のファイルを編集する想定です。個人的に作業時間計測や、todoの詳細を別途テキストファイルで楽に書くということがやりたくて作ったものです。
+- [todo.txt][1]の内容をかんばんのUIで表示
+  - かんばん内はVimライクな`hjkl`のキー操作でtodoを選択出来る
+  - 全体表示エリア, 期限間近表示エリア、期限切れ表示エリア、プロジェクトごとの表示エリアでそれぞれのtodoリストを優先度順に表示出来る
+- NeoVimと連携することで各todoの詳細をNeoVimでmarkdownファイルとして開いて編集出来る
+- 選択中のtodoの作業時間を自動で記録(SQLite3のデータベースにtodo毎に日時で保存。ただし時間の記録があるもののみ)
+- 編集系機能は未実装。[todo.txt format][1]には多用なクライアントがあり、編集はそれらを利用したり、直接エディタで[todo.txt format][1]のファイルを編集する想定。
 
 ## デモ
 ![gif][3]
@@ -18,10 +18,10 @@ tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]�
 - NVIM_LISTEN_ADDRESS
   - NeoVimとの連携に使用します。指定しないときのデフォルトは`/tmp/nvim.sock`
 - TODOTXT_DIR
-  - `todo.txt`のファイル配置ディレクトリになります。指定しないときのデフォルトは`$HOME/todotxt/`
-  - 対象ディレクトリが存在しないときはRailsサーバ起動時に自動的に作ります。
-  - `todo.txt`が`TODOTXT_DIR`配下に存在しないときは空ファイルをサーバ起動時に自動的に作ります。
-  - `TODOTXT_DIR/todo`が存在しないときはサーバ起動時に作ります。このディレクトリには前述のNeoVim連携時に各todoの詳細をメモするためのmarkdownファイルが配置されます。
+  - `todo.txt`のファイル配置ディレクトリ。指定しないときのデフォルトは`$HOME/todotxt/`
+  - 対象ディレクトリが存在しないときはローカルサーバ起動時に自動作成。
+  - `todo.txt`が`TODOTXT_DIR`配下に存在しないときは空ファイルをローカルサーバ起動時に自動作成。
+  - `$TODOTXT_DIR/todo`が存在しないときはローカルサーバ起動時に自動作成。このディレクトリには前述のNeoVim連携時に各todoの詳細をメモするためのmarkdownファイルが配置される。
 
 ## インストール & 起動
 ```
@@ -30,9 +30,13 @@ tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]�
 ❯ ./bin/setup
 ❯ ./bin/dev
 ```
+NeoVim連携を利用する場合、別ターミナルで以下を実行してNeoVimを起動しておく
+```
+❯ NVIM_LISTEN_ADDRESS=/tmp/nvim.sock nvim
+```
 
 ## 操作方法
-Vimライクなキーボード操作のみ可能です。NeoVim連携が正しく設定されていればフォーカスのあるtodoのメモがNeoVim側で自動で開きます。
+基本的にはキーボード操作のみ対応。NeoVim連携が正しく設定されていればフォーカスのあるtodoのメモがNeoVim側で自動で開く。また各todoはマウスでの選択にも対応。
 - j
   - 次のtodoにフォーカスが移動
 - k
@@ -43,12 +47,6 @@ Vimライクなキーボード操作のみ可能です。NeoVim連携が正し�
   - 右のリストのtodoにフォーカスが移動
 - o
   - todo内部にURLがある場合に対象URLを別ウィンドウで開く
-  
-## その他
-### 連携用のNeoVimの起動例
-```
-❯ NVIM_LISTEN_ADDRESS=/tmp/nvim.sock nvim
-```
 
 [1]: https://github.com/todotxt/todo.txt
 [2]: https://github.com/topydo/topydo
