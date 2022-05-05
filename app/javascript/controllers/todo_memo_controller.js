@@ -8,6 +8,12 @@ export default class extends Controller {
   }
 
   open() {
-    this.openFormTarget.requestSubmit()
+    this.timeout = setTimeout(() => {
+      this.openFormTarget.requestSubmit()
+    }, 500)
+  }
+
+  cancel() {
+    clearTimeout(this.timeout)
   }
 }

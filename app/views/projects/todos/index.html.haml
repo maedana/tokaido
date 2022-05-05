@@ -1,0 +1,5 @@
+= render layout: 'todos/index', locals: { todo_list_keys: [@project] } do
+  .flex.flex-row.bg-grey-200.overflow-visible
+    .flex-none.h-screen.bg-gray-600{ class: 'w-1/6' }
+      = turbo_frame_tag "#{@project}_todos" do
+        = render partial: 'todos/todos', locals: { todos: @todos, key: @project, title: @project }

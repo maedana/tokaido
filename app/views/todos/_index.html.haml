@@ -1,0 +1,12 @@
+:ruby
+  hotkeys_bindings_value = {
+    j: '#js-todos-dashboard->todos#moveDown',
+    k: '#js-todos-dashboard->todos#moveUp',
+    l: '#js-todos-dashboard->todos#moveRight',
+    h: '#js-todos-dashboard->todos#moveLeft',
+    o: '#js-todos-dashboard->todos#openLink',
+  }.to_json
+  todo_list_keys ||= []
+  todo_list_keys_value = todo_list_keys.to_json
+.bg-gray-200.h-screen#js-todos-dashboard{ data: { controller: 'todos hotkeys', 'hotkeys-bindings-value': hotkeys_bindings_value, action: 'focusin->todos#resetActiveTodoListIndex', 'todos-todo-list-keys-value': todo_list_keys_value } }
+  = yield

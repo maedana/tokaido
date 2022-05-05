@@ -1,2 +1,2 @@
-= turbo_stream.replace_all ".turbo-todo-#{@todo.tags[:id]}:not(:focus)" do
-  = render partial: 'todo', locals: { todo: @todo, todo_counter: params[:todo_counter] }
+= turbo_stream.replace_all ".turbo-daily-elapsed-time-form-#{@todo.tags[:id]}" do
+  = render 'todos/daily_elapsed_time_form', todo: @todo

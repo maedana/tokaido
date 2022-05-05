@@ -2,57 +2,47 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="todos"
 export default class extends Controller {
-  static targets = ['todoList', 'todo']
+  static targets = ['todoList']
+  static values = { todoListKeys: Array }
 
   connect() {
-    this.focusedElementsByTodos = []
-    this.focusedTodo = this.todoTarget
-    this.focusedTodo?.focus() // デフォルトで最初のTodoにフォーカス
     this.currentTodoListIndex = 0
-    this.firstTodoInLists = this.todoTargets.filter((element) => {
-      return element.dataset.isFirstInList === 'true'
-    })
+    this._currentTodoListController()?.focus()
   }
 
   moveDown() {
-    this._focus(this.focusedTodo.nextElementSibling)
+    this._currentTodoListController()?.moveDown()
   }
 
   moveUp() {
-    this._focus(this.focusedTodo.previousElementSibling)
+    this._currentTodoListController()?.moveUp()
   }
 
   moveRight() {
     const todoLists = this.todoListTargets
-    this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
-    const nextTodoListIndex = todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0
-    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || this.firstTodoInLists[nextTodoListIndex]
-    this.currentTodoListIndex = nextTodoListIndex
-    this._focus(nextFocusTodo)
+    this.currentTodoListIndex = (todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0)
+    this._currentTodoListController()?.focus()
   }
 
-  // MEMO: moveRightとほぼ同じDRYにしたいところ
   moveLeft() {
     const todoLists = this.todoListTargets
-    this.focusedElementsByTodos[this.currentTodoListIndex] = this.focusedTodo
-    const nextTodoListIndex = todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1
-    const nextFocusTodo = this.focusedElementsByTodos[nextTodoListIndex] || this.firstTodoInLists[nextTodoListIndex]
-    this.currentTodoListIndex = nextTodoListIndex
-    this._focus(nextFocusTodo)
+    this.currentTodoListIndex = (todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1)
+    this._currentTodoListController()?.focus()
   }
 
   openLink() {
     this.focusedTodo.querySelector('a')?.click()
   }
 
-  _focus(focusCandidate) {
-    if (this.todoTargets.includes(focusCandidate)) {
-      this.focusedTodo = focusCandidate
-      this.focusedTodo.focus()
-      // タイトル部分がstickyで上までスクロールしきらないのを補正
-      if (this.focusedTodo.dataset.isFirstInList === 'true') {
-        this.todoListTargets[this.currentTodoListIndex].scrollTop = 0
-      }
-    }
+  // focusinならバブリングするので、todoにフォーカスがあたったときの処理をフックしている
+  // フォーカス位置のindexを再セットしている。キーボード操作とマウスクリックで現在値を合わせるための処置
+  resetActiveTodoListIndex() {
+    const activeFocusManagerController = this.application.getControllerForElementAndIdentifier(document.activeElement, 'todo-focus-manager')
+    const activeListKey = activeFocusManagerController?.listKeyValue
+    this.currentTodoListIndex = this.todoListKeysValue.findIndex((key) => key === activeListKey) || 0
+  }
+
+  _currentTodoListController() {
+    return this.application.getControllerForElementAndIdentifier(this.todoListTargets[this.currentTodoListIndex], 'todo-list')
   }
 }
