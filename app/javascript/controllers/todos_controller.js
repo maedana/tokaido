@@ -37,6 +37,11 @@ export default class extends Controller {
     this.focusedTodo.querySelector('a')?.click()
   }
 
+  complete() {
+    const todoCompletionController = this.application.getControllerForElementAndIdentifier(document.activeElement, 'todo-completion')
+    todoCompletionController?.done()
+  }
+
   // focusinならバブリングするので、todoにフォーカスがあたったときの処理をフックしている
   // フォーカス位置のindexを再セットしている。キーボード操作とマウスクリックで現在値を合わせるための処置
   resetActiveTodoListIndex() {

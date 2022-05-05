@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :todos, only: %i[index edit] do
     member do
       post :save_elapsed_time
+      post :complete
     end
   end
   resources :overdue_todos, only: %i[index]

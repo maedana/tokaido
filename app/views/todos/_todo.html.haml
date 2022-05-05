@@ -1,6 +1,6 @@
 :ruby
   todo_data = {
-    controller: 'time-manager todo-memo todo-focus-manager',
+    controller: 'time-manager todo-memo todo-focus-manager todo-completion',
     action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel focus->todo-focus-manager#saveFocus',
     'time-manager-elapsed-time-value': 0,
     'todo-memo-available-value': @neovim_available,
@@ -11,6 +11,8 @@
 %li.bg-gray-800.border-b.border-b-gray-500.border-r-0.border-r-gray-500.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: "#{todo.overdue? ? 'border-l-red-700' : 'border-l-green-700'}", data: todo_data }
   -# MEMO: キーボード操作でrequestSubmitさせるためのフォームなので中身は空でいい。何かないとだめなのでspanをおいてる
   = form_with url: edit_todo_path(todo.tags[:id]), method: :get, data: { 'todo-memo-target': 'openForm' } do
+    %span
+  = form_with url: complete_todo_path(todo.tags[:id]), data: { 'todo-completion-target': 'completeForm' } do
     %span
   = render 'todos/daily_elapsed_time_form', todo: todo
   .flex.items-center.space-x-4

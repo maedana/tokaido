@@ -22,6 +22,11 @@ class TodosController < ApplicationController
     daily_elapsed_time.update(daily_elapsed_time_params)
   end
 
+  def complete
+    TodoList.new.do!(params[:id])
+    head :ok
+  end
+
   private
 
   def daily_elapsed_time_params
