@@ -8,6 +8,9 @@ export default class extends Controller {
   static targets = ['elapsedTime', 'elapsedTimeField', 'saveForm']
 
   connect() {
+  }
+
+  elapsedTimeFieldTargetConnected() {
     this.elapsedTimeValue = this.elapsedTimeFieldTarget.value
     this.elapsedTimeTarget.textContent = this._humanElapsedTimeValue()
   }
