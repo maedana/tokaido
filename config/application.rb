@@ -39,6 +39,7 @@ module Tokaido
       FileUtils.mkdir_p(TodoList.todotxt_dir)
       FileUtils.mkdir_p(TodoList.todotxt_markdown_dir)
       FileUtils.touch(TodoList.todotxt_path) unless File.exist?(TodoList.todotxt_path)
+      FileUtils.touch(TodoList.donetxt_path) unless File.exist?(TodoList.donetxt_path)
       TodoList.new.setup
 
       # Todoファイルの監視を行い、変更があれば即時反映
