@@ -3,9 +3,8 @@
   todo_data = {
     controller: 'time-manager todo-memo',
     'time-manager-elapsed-time-value': 0,
-    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open',
-    'todos-target': 'todo',
-    'is-first-in-list': "#{todo_counter == 0}",
+    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel',
+    'todo-list-target': 'todo',
     'todo-id': todo.tags[:id],
   }
 %li.bg-gray-800.border-b.border-b-gray-500.border-r-0.border-r-gray-500.border-l-4.focus:bg-gray-600.focus:outline-none.p-3{ tabindex: '-1', class: "#{todo.overdue? ? 'border-l-red-700' : 'border-l-green-700'} turbo-todo-#{todo.tags[:id]}", data: todo_data }
@@ -16,7 +15,6 @@
     = form.hidden_field :todo, value: todo.text
     - # N+1だけど一旦直接読み込み
     = form.hidden_field :elapsed_seconds, value: default_elapsed_time_value, data: { 'time-manager-target': 'elapsedTimeField' }
-    = hidden_field_tag :todo_counter, value: todo_counter
     %span
   .flex.items-center.space-x-4
     .flex-1.min-w-0

@@ -1,2 +1,2 @@
 = turbo_stream.replace_all ".turbo-todo-#{@todo.tags[:id]}:not(:focus)" do
-  = render partial: 'todo', locals: { todo: @todo, todo_counter: params[:todo_counter] }
+  = render partial: 'todo', locals: { todo: @todo }
