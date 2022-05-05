@@ -18,14 +18,18 @@ export default class extends Controller {
   }
 
   moveRight() {
-    const todoLists = this.todoListTargets
-    this.currentTodoListIndex = (todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0)
+    if (document.activeElement !== document.querySelector('body')) {
+      const todoLists = this.todoListTargets
+      this.currentTodoListIndex = (todoLists[this.currentTodoListIndex + 1] ? this.currentTodoListIndex + 1 : 0)
+    }
     this._currentTodoListController()?.focus()
   }
 
   moveLeft() {
-    const todoLists = this.todoListTargets
-    this.currentTodoListIndex = (todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1)
+    if (document.activeElement !== document.querySelector('body')) {
+      const todoLists = this.todoListTargets
+      this.currentTodoListIndex = (todoLists[this.currentTodoListIndex - 1] ? this.currentTodoListIndex - 1 : todoLists.length - 1)
+    }
     this._currentTodoListController()?.focus()
   }
 

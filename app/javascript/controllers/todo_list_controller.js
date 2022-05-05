@@ -9,14 +9,14 @@ export default class extends Controller {
   }
 
   moveDown() {
-    if (this.activeTodoIndex < (this.todoTargets.length - 1)) {
+    if (document.activeElement !== document.querySelector('body') && this.activeTodoIndex < (this.todoTargets.length - 1)) {
       this.activeTodoIndex += 1
     }
     this.focus()
   }
 
   moveUp() {
-    if (this.activeTodoIndex > 0) {
+    if (document.activeElement !== document.querySelector('body') && this.activeTodoIndex > 0) {
       this.activeTodoIndex -= 1
     }
     this.focus()
