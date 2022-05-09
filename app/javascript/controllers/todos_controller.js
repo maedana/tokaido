@@ -34,7 +34,7 @@ export default class extends Controller {
   }
 
   openLink() {
-    this.focusedTodo.querySelector('a')?.click()
+    document.activeElement.querySelector('a')?.click()
   }
 
   complete() {
