@@ -29,7 +29,7 @@ export default class extends Controller {
         }
         this.worker.postMessage({})
       }
-    }, 1000) // フォーカスしてから1秒以上経過して初めて記録でいい。
+    }, 100) // フォーカスあたって即記録して欲しいわけじゃないので少し遅らせる
   }
 
   stopCountTime() {
