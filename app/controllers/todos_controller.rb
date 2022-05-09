@@ -17,6 +17,8 @@ class TodosController < ApplicationController
   def save_elapsed_time
     todo_uuid = params[:id]
     @todo = TodoList.new.find(todo_uuid)
+    head :not_found unless @todo
+
     daily_elapsed_time = DailyElapsedTime.find_or_initialize_by(uuid: todo_uuid, target_date: Date.current)
     # MEMO: 失敗は一旦考慮しない
     daily_elapsed_time.update(daily_elapsed_time_params)
