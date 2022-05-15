@@ -5,4 +5,4 @@
         .flex-1.min-w-0
           %p.text-sm.font-medium.text-white.text-center
             = title
-    = render partial: 'todos/todo', collection: todos, as: :todo, locals: { list_key: key }
+    = render Todos::TodoComponent.with_collection(todos, list_key: key, neovim_available: @neovim_available)
