@@ -1,5 +1,0 @@
-- default_elapsed_time_value = DailyElapsedTime.find_by(uuid: todo.tags[:id], target_date: Date.current)&.elapsed_seconds || 0
-= form_with model: DailyElapsedTime.new, url: save_elapsed_time_todo_path(todo.tags[:id]), class: "turbo-daily-elapsed-time-form-#{todo.tags[:id]}", data: { 'time-manager-target': 'saveForm' } do |form|
-  = form.hidden_field :todo, value: todo.text
-  - # N+1だけど一旦直接読み込み
-  = form.hidden_field :elapsed_seconds, value: default_elapsed_time_value, data: { 'time-manager-target': 'elapsedTimeField' }

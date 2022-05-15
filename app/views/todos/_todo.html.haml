@@ -14,7 +14,7 @@
     %span
   = form_with url: complete_todo_path(todo.tags[:id]), data: { 'todo-completion-target': 'completeForm' } do
     %span
-  = render 'todos/daily_elapsed_time_form', todo: todo
+  = render Todos::DailyElapsedTimeFormComponent.new(todo: todo)
   .flex.items-center.space-x-4
     .flex-1.min-w-0
       %p.text-xs.text-gray-400.break-all

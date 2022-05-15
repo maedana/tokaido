@@ -18,6 +18,7 @@ gem 'stimulus-rails'
 gem 'tailwindcss-rails'
 gem 'todo-txt', github: 'maedana/todo-txt-gem'
 gem 'turbo-rails'
+gem 'view_component'
 
 group :development, :test do
   gem 'debug'

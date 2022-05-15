@@ -1,0 +1,3 @@
+= form_with model: DailyElapsedTime.new, url: save_elapsed_time_todo_path(@todo.tags[:id]), class: "turbo-daily-elapsed-time-form-#{@todo.tags[:id]}", data: { 'time-manager-target': 'saveForm' } do |form|
+  = form.hidden_field :todo, value: @todo.text
+  = form.hidden_field :elapsed_seconds, value: default_elapsed_time_value, data: { 'time-manager-target': 'elapsedTimeField' }

@@ -1,2 +1,2 @@
 = turbo_stream.replace_all ".turbo-daily-elapsed-time-form-#{@todo.tags[:id]}" do
-  = render 'todos/daily_elapsed_time_form', todo: @todo
+  = render Todos::DailyElapsedTimeFormComponent.new(todo: @todo)
