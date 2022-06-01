@@ -21,7 +21,11 @@ class TodosController < ApplicationController
 
     daily_elapsed_time = DailyElapsedTime.find_or_initialize_by(uuid: todo_uuid, target_date: Date.current)
     # MEMO: 失敗は一旦考慮しない
-    daily_elapsed_time.update(daily_elapsed_time_params)
+    if daily_elapsed_time.new_record?
+      daily_elapsed_time.update!(daily_elapsed_time_params.merge(elapsed_seconds: 0))
+    else
+      daily_elapsed_time.update!(daily_elapsed_time_params)
+    end
   end
 
   def complete
