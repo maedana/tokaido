@@ -1,8 +1,7 @@
 :ruby
   todo_data = {
-    controller: 'time-manager todo-memo todo-focus-manager todo-completion',
-    action: 'focus->time-manager#startCountTime blur->time-manager#stopCountTime focus->todo-memo#open blur->todo-memo#cancel focus->todo-focus-manager#saveFocus',
-    'time-manager-elapsed-time-value': 0,
+    controller: 'todo-memo todo-focus-manager todo-completion',
+    action: 'focus->todo-memo#open blur->todo-memo#cancel focus->todo-focus-manager#saveFocus',
     'todo-memo-available-value': @neovim_available,
     'todo-focus-manager-list-key-value': @list_key,
     'todo-focus-manager-uuid-value': @todo.tags[:id],
@@ -14,7 +13,6 @@
     %span
   = form_with url: complete_todo_path(@todo.tags[:id]), data: { 'todo-completion-target': 'completeForm' } do
     %span
-  = render Todos::DailyElapsedTimeFormComponent.new(todo: @todo)
   .flex.items-center.space-x-4
     .flex-1.min-w-0
       %p.text-xs.text-gray-400.break-all
@@ -31,4 +29,3 @@
       .flex.justify-between.text-xs.text-gray-400
         %p
           = @todo.due_on&.to_s || '期限なし'
-        %p{ data: { 'time-manager-target': 'elapsedTime' } }

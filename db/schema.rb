@@ -10,16 +10,5 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_03_072806) do
-  create_table "daily_elapsed_times", force: :cascade do |t|
-    t.string "uuid", null: false
-    t.string "todo", null: false
-    t.date "target_date", null: false
-    t.integer "elapsed_seconds", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["target_date"], name: "index_daily_elapsed_times_on_target_date"
-    t.index ["uuid", "target_date"], name: "index_daily_elapsed_times_on_uuid_and_target_date", unique: true
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_02_05_034342) do
 end
