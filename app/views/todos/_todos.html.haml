@@ -5,4 +5,4 @@
         .flex-1.min-w-0
           %p.text-sm.font-medium.text-white.text-center
             = title
-    = render Todos::TodoComponent.with_collection(todos, list_key: key, neovim_available: @neovim_available)
+    = render Todos::TodoComponent.with_collection(todos, list_key: key)

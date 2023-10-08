@@ -1,13 +1,5 @@
 class NeovimClient
   class << self
-    def available?
-      attach
-      true
-    rescue StandardError
-      Rails.logger.debug('Connection with NeoVim is not enabled.')
-      false
-    end
-
     def open(todo_uuid)
       client = attach
       path = File.join(TodoList.todotxt_markdown_dir, "#{todo_uuid}.md")

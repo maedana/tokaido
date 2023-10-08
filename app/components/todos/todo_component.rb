@@ -3,9 +3,8 @@
 class Todos::TodoComponent < ViewComponent::Base
   with_collection_parameter :todo
 
-  def initialize(todo:, list_key:, neovim_available:)
+  def initialize(todo:, list_key:)
     @todo = todo
     @list_key = list_key
-    @neovim_available = neovim_available
   end
 end
