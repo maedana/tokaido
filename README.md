@@ -1,5 +1,10 @@
 # README
 
+## ⚠️ Notice
+このプロジェクトはもうメンテナンスしていません。代わりに https://github.com/maedana/torudo を使ってください。
+
+---
+
 tokaidoは[todo.txt format][1]のテキストファイルを[topydo colums][2]にインスパイアされたVimライクなキーボード操作でブラウザから閲覧するためのビューワ。
 
 ## 機能
